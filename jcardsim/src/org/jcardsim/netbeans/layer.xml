@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE filesystem PUBLIC "-//NetBeans//DTD Filesystem 1.1//EN" "http://www.netbeans.org/dtds/filesystem-1_1.dtd">
+<filesystem>
+    <folder name="Actions">
+    </folder>
+    
+    <folder name="org-netbeans-modules-javacard-spi">
+        <folder name="kinds">
+            <folder name="jcardsim">
+                <file name="org-jcardsim-netbeans-CardsFactoryImpl.instance"/>
+            </folder>
+        </folder>
+    </folder>
+</filesystem>
