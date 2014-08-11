@@ -2,6 +2,7 @@ package org.jcardsim.netbeans;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Logger;
 import org.netbeans.modules.javacard.spi.Cards;
 import org.netbeans.modules.javacard.spi.JavacardPlatform;
 import org.openide.loaders.DataObject;
@@ -27,13 +28,13 @@ public final class CardsImpl extends Cards implements Lookup.Provider {
         return Collections.singletonList(this);
     }
 
+    @Override
     public synchronized Lookup getLookup() {
         if (lkp == null) {
             JavacardPlatform pform = dob.getLookup().lookup(JavacardPlatform.class);
-            if (pform != null) { //file possibly deleted?
-//                JCardSimCard theCard = new JCardSimCard(null, pform, null);
+            if (pform != null) { 
+                //file possibly deleted?
                 JCardSimCard theCard = new JCardSimCard(pform);
-                
                 lkp = Lookups.fixed(theCard);
             } else {
                 lkp = Lookup.EMPTY;

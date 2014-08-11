@@ -32,10 +32,10 @@ import org.openide.util.NbBundle;
 import org.openide.util.RequestProcessor;
 
 /**
- * 
+ *
  * @author Vit
  */
-public  class JCardSimCard extends AbstractCard {
+public class JCardSimCard extends AbstractCard {
 
     public static final String SINGLE_CARD_ID = "card"; //NOI18N
 
@@ -44,12 +44,11 @@ public  class JCardSimCard extends AbstractCard {
     private static final String HOST = "smartcard"; //NOI18N
 
     private volatile boolean connected;
-    
+
     private final RequestProcessor rp;
 
     public JCardSimCard(JavacardPlatform pform) {
         super(pform, SINGLE_CARD_ID);
-        System.out.println("new JCardSimCard()");
         rp = new RequestProcessor("jCardSim"); //NOI18N
     }
 
@@ -130,8 +129,11 @@ public  class JCardSimCard extends AbstractCard {
         }
     }
 
+    
+    /**
+     * 
+     */
     private final class Caps implements CapabilitiesProvider {
-
         public Set<Class<? extends ICardCapability>> getSupportedCapabilityTypes() {
             Set<Class<? extends ICardCapability>> result = new HashSet<Class<? extends ICardCapability>>();
             result.add(CardInfo.class);
@@ -164,22 +166,24 @@ public  class JCardSimCard extends AbstractCard {
 
     class Start implements ICardCapability, StartCapability {
 
-        private int DEBUG = 1;
 
         @Override
         public Condition start(RunMode mode, Project project) {
             if (project == null && mode != RunMode.RUN) {
                 throw new NullPointerException("Project parameter required for DEBUG/PROFILE run modes"); //NOI18N
             }
+            
             final boolean debug = mode == RunMode.DEBUG;
+            
             if (!getState().isNotRunning()) {
                 log("Already running, return dummy condition"); //NOI18N
                 return new ConditionImpl();
             }
 
-            final ConditionImpl c = new ConditionImpl(DEBUG, JCardSimCard.this);
+            final ConditionImpl c = new ConditionImpl(1, JCardSimCard.this);
 
             setState(BEFORE_STARTING);
+            // 
             rp.post(new Starter(c, mode, project));
             return c;
 

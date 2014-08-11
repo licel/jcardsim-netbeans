@@ -4,6 +4,9 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 
+/**
+ *  
+ */
 final class ConditionImpl implements Condition {
     private volatile int steps;
     private final JCardSimCard card;

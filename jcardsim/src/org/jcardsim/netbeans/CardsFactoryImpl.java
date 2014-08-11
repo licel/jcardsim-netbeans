@@ -7,13 +7,15 @@ import org.openide.util.Lookup;
 
 /**
  * jCardSim CardFactory
+ *
  * @author Vitaly Ligay email:vitaly.ligay@gmail.com
  */
 public class CardsFactoryImpl extends CardsFactory {
-    
+
     @Override
     protected Cards createCards(Lookup.Provider source) {
-        DataObject platformDob = source.getLookup().lookup(DataObject.class);
+        Lookup lookup = source.getLookup();
+        DataObject platformDob = lookup.lookup(DataObject.class);
         return new CardsImpl(platformDob);
     }
 }
